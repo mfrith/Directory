@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -174,7 +173,7 @@ public class clsSqlCommandUpdate
  
             // Data to be inserted
             string[] names = { "Wade", "David", "Charlie" };
-            for (int i = 0; i < = 2; i++)
+            for (int i = 0; i <= 2; i++)
             {
                 nonqueryCommand.Parameters["@FirstName"].Value = names[i];
                 nonqueryCommand.Parameters["@LastName"].Value = names[i];
