@@ -530,19 +530,19 @@ namespace DistrictManager
       Word.Range wrdRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
       if (hasStatus)
       {
-        divGovTitle = oDoc.Tables.Add(wrdRng, 3, 1, ref oMissing, ref oMissing);
+        divGovTitle = oDoc.Tables.Add(wrdRng, 2, 1, ref oMissing, ref oMissing);
         offset = 1;
       }
       else
-        divGovTitle = oDoc.Tables.Add(wrdRng, 2, 1, ref oMissing, ref oMissing);
+        divGovTitle = oDoc.Tables.Add(wrdRng, 1, 1, ref oMissing, ref oMissing);
 
       divGovTitle.Range.ParagraphFormat.SpaceAfter = 0;
       divGovTitle.Cell(1, 1).Range.Text = "Division " + division;
-      divGovTitle.Cell(2, 1).Range.Text = website;
+      //divGovTitle.Cell(2, 1).Range.Text = website;
       divGovTitle.Rows[1].Range.Font.Bold = 1;
       divGovTitle.Rows[1].Range.Font.Size = 14;
-      divGovTitle.Rows[2].Range.Font.Bold = 1;
-      divGovTitle.Rows[2].Range.Font.Size = 9;
+      //divGovTitle.Rows[2].Range.Font.Bold = 1;
+      //divGovTitle.Rows[2].Range.Font.Size = 9;
 
       if (hasStatus)
       {
@@ -558,9 +558,9 @@ namespace DistrictManager
         }
         divStat += "Distinguished Division";
 
-        divGovTitle.Cell(3, 1).Range.Text = divStat;
-        divGovTitle.Rows[3].Range.Font.Bold = 1;
-        divGovTitle.Rows[3].Range.Font.Size = 9;
+        divGovTitle.Cell(2, 1).Range.Text = divStat;
+        divGovTitle.Rows[2].Range.Font.Bold = 1;
+        divGovTitle.Rows[2].Range.Font.Size = 9;
       }
       divGovTitle.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
       //divGovTitle.Select();
@@ -581,6 +581,8 @@ namespace DistrictManager
       divisionGovernorTable.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
       divisionGovernorTable.Borders[Word.WdBorderType.wdBorderBottom].LineWidth = Word.WdLineWidth.wdLineWidth100pt;
 
+      if (!hasStatus)
+        divisionGovernorTable.Rows[2].Range.Font.Size = 4;
       string office;
       String email = "";
       string name = "";
@@ -609,10 +611,10 @@ namespace DistrictManager
         String blank = "";
         if (memberID > 0)
         {
-          if (office == "Division Governor")
+          if (office == "Division Director")
           {
             GenerateMemberInfo(memberID, ref name, ref loc1, ref loc2, ref phone1, ref phone2, ref blank, false, true, false);
-            email = division + "gov@d12toastmasters.org";
+            email = division + "dir@d12toastmasters.org";
           }
           else
             GenerateMemberInfo(memberID, ref name, ref loc1, ref loc2, ref phone1, ref phone2, ref email, false, true, false);
@@ -627,7 +629,7 @@ namespace DistrictManager
         //  email = "";
         //}
 
-        // divisionGovernorTable.Rows[2 + (8 * (counter - 1))].Range.Font.Size = 8;
+
         divisionGovernorTable.Cell(3 + offset + (blocksize * (counter - 1)), column).Range.Text = office;
         divisionGovernorTable.Cell(4 + offset + (blocksize * (counter - 1)), column).Range.Text = name;
         //divisionGovernorTable.Cell(5 + offset + (blocksize * (counter - 1)), column).Range.Text = loc1;
@@ -643,7 +645,7 @@ namespace DistrictManager
         //divisionGovernorTable.Rows[7 + offset + (blocksize * (counter - 1))].Range.Font.Size = 9;
         //divisionGovernorTable.Rows[8 + offset + (blocksize * (counter - 1))].Range.Font.Size = 9;
         //divisionGovernorTable.Rows[9 + offset + (blocksize * (counter - 1))].Range.Font.Size = 9;
-        divisionGovernorTable.Rows[7 + offset + (blocksize * (counter - 1))].Range.Font.Size = 8;
+        divisionGovernorTable.Rows[7 + offset + (blocksize * (counter - 1))].Range.Font.Size = 4;
         if (column == 1)
           column = 2;
         else if (column == 2)
