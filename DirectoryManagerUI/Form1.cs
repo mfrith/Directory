@@ -609,7 +609,7 @@ namespace DistrictManager
         String blank = "";
         if (memberID > 0)
         {
-          if (office == "Division Governor")
+          if (office == "Division Director")
           {
             GenerateMemberInfo(memberID, ref name, ref loc1, ref loc2, ref phone1, ref phone2, ref blank, false, true, false);
             email = division + "gov@d12toastmasters.org";
@@ -1051,7 +1051,7 @@ namespace DistrictManager
           " FROM    DivisionGovernor INNER JOIN  Members ON DivisionGovernor.MemberID = Members.MemberID", conn);
       */
       SqlDataAdapter daDivGov = new SqlDataAdapter("select Division, Office, MemberID, email from DivisionStaff " +
-          "where office = 'Division Governor' order by Division", conn);
+          "where office = 'Division Director' order by Division", conn);
 
       daDivGov.Fill(dsDivGov);
       DataTable datatableDivGov = dsDivGov.Tables["Table"];
@@ -1094,7 +1094,7 @@ namespace DistrictManager
         }
 
         districtOfficersTable.Rows[2 + (blocksize * (counter - 1))].Range.Font.Size = 8;
-        districtOfficersTable.Cell(3 + (blocksize * (counter - 1)), column).Range.Text = "Division " + division + " Governor";
+        districtOfficersTable.Cell(3 + (blocksize * (counter - 1)), column).Range.Text = "Division " + division + " Director";
         districtOfficersTable.Cell(4 + (blocksize * (counter - 1)), column).Range.Text = name;
         //districtOfficersTable.Cell(5 + (8 * (counter - 1)), column).Range.Text = loc1;
         //districtOfficersTable.Cell(6 + (8 * (counter - 1)), column).Range.Text = loc2;
@@ -3142,7 +3142,7 @@ namespace DistrictManager
 
         if (bSEC)
         {
-          clubRow2 = "Special Environment Club - contact Area Governor";
+          clubRow2 = "Special Environment Club - contact Area Director";
           clubRow3 = "";
           /*
           if (clubNo == "7187" || clubNo == "8486" || clubNo == "771553" || clubNo == "814824" ||
