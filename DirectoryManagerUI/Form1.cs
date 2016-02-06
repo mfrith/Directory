@@ -546,7 +546,7 @@ namespace DistrictManager
 
       if (hasStatus)
       {
-        string divStat = "2013-2014 ";
+        string divStat = "2014-2015 ";
         switch (divStatus)
         {
           case "P":
@@ -612,7 +612,7 @@ namespace DistrictManager
           if (office == "Division Director")
           {
             GenerateMemberInfo(memberID, ref name, ref loc1, ref loc2, ref phone1, ref phone2, ref blank, false, true, false);
-            email = division + "gov@d12toastmasters.org";
+            email = division + "Dir@d12toastmasters.org";
           }
           else
             GenerateMemberInfo(memberID, ref name, ref loc1, ref loc2, ref phone1, ref phone2, ref email, false, true, false);
@@ -2783,7 +2783,7 @@ namespace DistrictManager
         if (!System.DBNull.Value.Equals(rowAreaGov.ItemArray[3]))
           email = (string)rowAreaGov.ItemArray[3];
         else
-          email = division + area.ToString() + "gov@d12toastmasters.org";
+          email = division + area.ToString() + "Dir@d12toastmasters.org";
       }
 
       string office = "";
