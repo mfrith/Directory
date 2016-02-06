@@ -546,7 +546,7 @@ namespace DistrictManager
 
       if (hasStatus)
       {
-        string divStat = "2013-2014 ";
+        string divStat = "2014-2015 ";
         switch (divStatus)
         {
           case "P":
@@ -614,7 +614,7 @@ namespace DistrictManager
           if (office == "Division Director")
           {
             GenerateMemberInfo(memberID, ref name, ref loc1, ref loc2, ref phone1, ref phone2, ref blank, false, true, false);
-            email = division + "dir@d12toastmasters.org";
+            email = division + "Dir@d12toastmasters.org";
           }
           else
             GenerateMemberInfo(memberID, ref name, ref loc1, ref loc2, ref phone1, ref phone2, ref email, false, true, false);
@@ -1053,7 +1053,7 @@ namespace DistrictManager
           " FROM    DivisionGovernor INNER JOIN  Members ON DivisionGovernor.MemberID = Members.MemberID", conn);
       */
       SqlDataAdapter daDivGov = new SqlDataAdapter("select Division, Office, MemberID, email from DivisionStaff " +
-          "where office = 'Division Governor' order by Division", conn);
+          "where office = 'Division Director' order by Division", conn);
 
       daDivGov.Fill(dsDivGov);
       DataTable datatableDivGov = dsDivGov.Tables["Table"];
@@ -1096,7 +1096,7 @@ namespace DistrictManager
         }
 
         districtOfficersTable.Rows[2 + (blocksize * (counter - 1))].Range.Font.Size = 8;
-        districtOfficersTable.Cell(3 + (blocksize * (counter - 1)), column).Range.Text = "Division " + division + " Governor";
+        districtOfficersTable.Cell(3 + (blocksize * (counter - 1)), column).Range.Text = "Division " + division + " Director";
         districtOfficersTable.Cell(4 + (blocksize * (counter - 1)), column).Range.Text = name;
         //districtOfficersTable.Cell(5 + (8 * (counter - 1)), column).Range.Text = loc1;
         //districtOfficersTable.Cell(6 + (8 * (counter - 1)), column).Range.Text = loc2;
@@ -2785,7 +2785,7 @@ namespace DistrictManager
         if (!System.DBNull.Value.Equals(rowAreaGov.ItemArray[3]))
           email = (string)rowAreaGov.ItemArray[3];
         else
-          email = division + area.ToString() + "gov@d12toastmasters.org";
+          email = division + area.ToString() + "Dir@d12toastmasters.org";
       }
 
       string office = "";
@@ -3144,7 +3144,7 @@ namespace DistrictManager
 
         if (bSEC)
         {
-          clubRow2 = "Special Environment Club - contact Area Governor";
+          clubRow2 = "Special Environment Club - contact Area Director";
           clubRow3 = "";
           /*
           if (clubNo == "7187" || clubNo == "8486" || clubNo == "771553" || clubNo == "814824" ||
