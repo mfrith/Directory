@@ -581,8 +581,6 @@ namespace DistrictManager
       divisionGovernorTable.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
       divisionGovernorTable.Borders[Word.WdBorderType.wdBorderBottom].LineWidth = Word.WdLineWidth.wdLineWidth100pt;
 
-      if (!hasStatus)
-        divisionGovernorTable.Rows[2].Range.Font.Size = 4;
       string office;
       String email = "";
       string name = "";
@@ -630,6 +628,7 @@ namespace DistrictManager
         //}
 
 
+        divisionGovernorTable.Rows[2 + offset + (blocksize * (counter - 1))].Range.Font.Size = 4;
         divisionGovernorTable.Cell(3 + offset + (blocksize * (counter - 1)), column).Range.Text = office;
         divisionGovernorTable.Cell(4 + offset + (blocksize * (counter - 1)), column).Range.Text = name;
         //divisionGovernorTable.Cell(5 + offset + (blocksize * (counter - 1)), column).Range.Text = loc1;
@@ -645,7 +644,7 @@ namespace DistrictManager
         //divisionGovernorTable.Rows[7 + offset + (blocksize * (counter - 1))].Range.Font.Size = 9;
         //divisionGovernorTable.Rows[8 + offset + (blocksize * (counter - 1))].Range.Font.Size = 9;
         //divisionGovernorTable.Rows[9 + offset + (blocksize * (counter - 1))].Range.Font.Size = 9;
-        divisionGovernorTable.Rows[7 + offset + (blocksize * (counter - 1))].Range.Font.Size = 4;
+        //divisionGovernorTable.Rows[7 + offset + (blocksize * (counter - 1))].Range.Font.Size = 4;
         if (column == 1)
           column = 2;
         else if (column == 2)
