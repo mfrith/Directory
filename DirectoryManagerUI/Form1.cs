@@ -618,33 +618,16 @@ namespace DistrictManager
             GenerateMemberInfo(memberID, ref name, ref loc1, ref loc2, ref phone1, ref phone2, ref email, false, true, false);
         }
 
-        //if (counter > halfStaffCount)
-        //  counter = 1;
-
-        //if (phone2.Length < 1 && email.Length > 1)
-        //{
-        //  phone2 = email;
-        //  email = "";
-        //}
-
-
         divisionGovernorTable.Rows[2 + offset + (blocksize * (counter - 1))].Range.Font.Size = 4;
         divisionGovernorTable.Cell(3 + offset + (blocksize * (counter - 1)), column).Range.Text = office;
         divisionGovernorTable.Cell(4 + offset + (blocksize * (counter - 1)), column).Range.Text = name;
-        //divisionGovernorTable.Cell(5 + offset + (blocksize * (counter - 1)), column).Range.Text = loc1;
-        //divisionGovernorTable.Cell(6 + offset + (blocksize * (counter - 1)), column).Range.Text = loc2;
         divisionGovernorTable.Cell(5 + offset + (blocksize * (counter - 1)), column).Range.Text = phone1;
-        //divisionGovernorTable.Cell(6 + offset + (blocksize * (counter - 1)), column).Range.Text = phone2;
         divisionGovernorTable.Cell(6 + offset + (blocksize * (counter - 1)), column).Range.Text = email;
         divisionGovernorTable.Rows[3 + offset + (blocksize * (counter - 1))].Range.Font.Bold = 1;
         divisionGovernorTable.Rows[3 + offset + (blocksize * (counter - 1))].Range.Font.Size = 11;
         divisionGovernorTable.Rows[4 + offset + (blocksize * (counter - 1))].Range.Font.Size = 9;
         divisionGovernorTable.Rows[5 + offset + (blocksize * (counter - 1))].Range.Font.Size = 9;
         divisionGovernorTable.Rows[6 + offset + (blocksize * (counter - 1))].Range.Font.Size = 9;
-        //divisionGovernorTable.Rows[7 + offset + (blocksize * (counter - 1))].Range.Font.Size = 9;
-        //divisionGovernorTable.Rows[8 + offset + (blocksize * (counter - 1))].Range.Font.Size = 9;
-        //divisionGovernorTable.Rows[9 + offset + (blocksize * (counter - 1))].Range.Font.Size = 9;
-        //divisionGovernorTable.Rows[7 + offset + (blocksize * (counter - 1))].Range.Font.Size = 4;
         if (column == 1)
           column = 2;
         else if (column == 2)
@@ -3003,7 +2986,7 @@ namespace DistrictManager
       string zip;
       //string email2;
       string clubStatus = string.Empty;
-      string meeting = string.Empty;
+      //string meeting = string.Empty;
       string facebook = string.Empty;
       foreach (DataRow rowClub in dataTableClub.Rows)
       {
@@ -3013,18 +2996,6 @@ namespace DistrictManager
         // add a table for the club information
         clubNo = rowClub.ItemArray[1].ToString().Trim();
         bool bSEC = false;
-
-        //if (division == "A")
-        //{
-        //  if (clubNo == "2485" || clubNo == "3014")
-        //    bSEC = true;
-        //}
-
-        //if (division == "C")
-        //{
-        //  if (clubNo == "6900" || clubNo == "7730")
-        //    bSEC = true;
-        //}
 
         if (division == "D")
         {
@@ -3039,7 +3010,6 @@ namespace DistrictManager
               clubNo == "722657" || clubNo == "1535248")
             bSEC = true;
         }
-
 
         clubName = rowClub.ItemArray[2].ToString().Trim();
         dayOfTheWeek = rowClub.ItemArray[7].ToString().Trim();
@@ -3071,8 +3041,8 @@ namespace DistrictManager
           clubLocationTable = doc.Tables.Add(wrdRng, 4, 1, ref oMissing, ref oMissing);
           distinguishedClub = true;
         }
-        else if (meeting == "N")
-          clubLocationTable = doc.Tables.Add(wrdRng, 2, 1, ref oMissing, ref oMissing);
+        //else if (meeting == "N")
+        //  clubLocationTable = doc.Tables.Add(wrdRng, 2, 1, ref oMissing, ref oMissing);
         else
           clubLocationTable = doc.Tables.Add(wrdRng, 3, 1, ref oMissing, ref oMissing);
         clubLocationTable.Range.ParagraphFormat.SpaceAfter = 0;
@@ -3145,50 +3115,6 @@ namespace DistrictManager
         {
           clubRow2 = "Special Environment Club - contact Area Director";
           clubRow3 = "";
-          /*
-          if (clubNo == "7187" || clubNo == "8486" || clubNo == "771553" || clubNo == "814824" ||
-              clubNo == "722657")
-          {
-            clubRow2 = "";
-            if (dayOfTheWeek.Length > 1)
-              clubRow2 += dayOfTheWeek + " ";
-
-            if (time.Length > 1)
-              clubRow2 += time + " ";
-
-            clubRow3 = "Contact: Special Environment Clubs Chair, Randy Amelino, DTM";
-            clubRow4 = "Email: chemdryall@gnww.net Phone: 951-258-6901";
-
-            if (clubNo == "7187" || clubNo == "8486")
-              clubRow2 += "California Institute for Women, 16756 Chino-Corona Rd, Corona, 92880-9508";
-            else if (clubNo == "771553" || clubNo == "814824")
-              clubRow2 += "California Rehab Center, Bldg 601 Men’s Education Dept, Norco, 92860";
-            else if (clubNo == "722657")
-              clubRow2 += "California Rehab Center, Bldg 601 Men’s Education Dept, Norco, 92860";
-          }
-
-          if (clubNo == "782516" || clubNo == "1071907" || clubNo == "9681" || clubNo == "1167482" ||
-              clubNo == "1470790")
-          {
-            clubRow2 = "";
-            if (dayOfTheWeek.Length > 1)
-              clubRow2 += dayOfTheWeek + " ";
-
-            if (time.Length > 1)
-              clubRow2 += time + " ";
-
-            clubRow3 = "";
-            clubRow4 = "";
-            clubRow5 = "";
-
-            if (clubNo == "1167482")
-              clubRow2 += "Tameka Roberson, 760.922.0680x5074";
-            else
-              clubRow2 += "Chuckwalla Staff, cindy.nepusz@cdcr.ca.gov, 760.922.5300x5124";
-
-
-          }
-           */
         }
 
         clubLocationTable.Cell(1, 1).Range.Text = clubRow1;
@@ -3229,14 +3155,21 @@ namespace DistrictManager
           clubLocationTable.Rows[2].Range.Font.Bold = 1;
           clubLocationTable.Rows[2].Range.Font.Size = 9;
           clubLocationTable.Rows[3].Range.Font.Size = 9;
-          clubLocationTable.Rows[4].Range.Font.Size = 9;
+          if (bSEC)
+            clubLocationTable.Rows[4].Range.Font.Size = 4;
+          else
+            clubLocationTable.Rows[4].Range.Font.Size = 9;
+
         }
         else
         {
           clubLocationTable.Cell(2, 1).Range.Text = clubRow2;
           clubLocationTable.Cell(3, 1).Range.Text = clubRow3;
           clubLocationTable.Rows[2].Range.Font.Size = 9;
-          clubLocationTable.Rows[3].Range.Font.Size = 9;
+          if (bSEC)
+            clubLocationTable.Rows[3].Range.Font.Size = 4;
+          else
+            clubLocationTable.Rows[3].Range.Font.Size = 9;
         }
 
         Word.Paragraph clubLocBreakafter;
@@ -3246,6 +3179,16 @@ namespace DistrictManager
         clubLocBreakafter.Format.SpaceAfter = 0;
         clubLocBreakafter.KeepWithNext = -1;
 
+        if (bSEC) // just stop now
+        {
+          clubLocationTable.Rows.HeightRule = Microsoft.Office.Interop.Word.WdRowHeightRule.wdRowHeightAuto;
+          clubLocationTable.Borders[Word.WdBorderType.wdBorderLeft].LineStyle = Word.WdLineStyle.wdLineStyleNone;
+          clubLocationTable.Borders[Word.WdBorderType.wdBorderTop].LineStyle = Word.WdLineStyle.wdLineStyleNone;
+          clubLocationTable.Borders[Word.WdBorderType.wdBorderRight].LineStyle = Word.WdLineStyle.wdLineStyleNone;
+          clubLocationTable.Borders[Word.WdBorderType.wdBorderBottom].LineStyle = Word.WdLineStyle.wdLineStyleSingle;
+          clubLocationTable.Borders[Word.WdBorderType.wdBorderBottom].LineWidth = Word.WdLineWidth.wdLineWidth100pt;
+          continue;
+        }
         // determine which officer is selected
         Word.Table officersTable;
 
@@ -3424,8 +3367,8 @@ namespace DistrictManager
         //area = dlg.Area;
 
         area = System.Int32.Parse(sArea);
-        if (division.Equals("E") && area.Equals(5))
-          return;
+        //if (division.Equals("E") && area.Equals(5))
+        //  return;
         GenerateAreaThreadStart();
       }
 
