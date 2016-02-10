@@ -1297,7 +1297,7 @@ namespace DistrictManager
         chairDocRowCount++;
 
       //int totalRows = (int)chairDocRowCount * 8;
-      int totalRows = (int)chairDocRowCount * 6;
+      int totalRows = (int)chairDocRowCount * 5;
 
       object oRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
       Word.Table chairsTable;
@@ -1354,24 +1354,24 @@ namespace DistrictManager
         //  email = "";
         //}
 
-        if (phone1.Length < 1)
-        {
-          phone1 = phone2;
-          phone2 = email;
-          email = "";
-        }
+        //if (phone1.Length < 1)
+        //{
+        //  phone1 = phone2;
+        //  phone2 = email;
+        //  email = "";
+        //}
 
-        if (phone1.Length < 1)
-        {
-          phone1 = email;
-          phone2 = email = "";
-        }
+        //if (phone1.Length < 1)
+        //{
+        //  phone1 = email;
+        //  phone2 = email = "";
+        //}
 
-        if (phone2.Length < 1)
-        {
-          phone2 = email;
-          email = "";
-        }
+        //if (phone2.Length < 1)
+        //{
+        //  phone2 = email;
+        //  email = "";
+        //}
         //chairsTable.Cell(3 + (8 * (row)), column).Range.Text = office;
         //chairsTable.Cell(4 + (8 * (row)), column).Range.Text = name;
         //chairsTable.Cell(5 + (8 * (row)), column).Range.Text = loc1;
@@ -1379,11 +1379,11 @@ namespace DistrictManager
         //chairsTable.Cell(7 + (8 * (row)), column).Range.Text = phone1;
         //chairsTable.Cell(8 + (8 * (row)), column).Range.Text = phone2;
         //chairsTable.Cell(9 + (8 * (row)), column).Range.Text = email;
-        chairsTable.Cell(3 + (6 * (row)), column).Range.Text = office;
-        chairsTable.Cell(4 + (6 * (row)), column).Range.Text = name;
-        chairsTable.Cell(5 + (6 * (row)), column).Range.Text = phone1;
-        chairsTable.Cell(6 + (6 * (row)), column).Range.Text = phone2;
-        chairsTable.Cell(7 + (6 * (row)), column).Range.Text = email;
+        chairsTable.Cell(2 + (5 * (row)), column).Range.Text = office;
+        chairsTable.Cell(3 + (5 * (row)), column).Range.Text = name;
+        chairsTable.Cell(4 + (5 * (row)), column).Range.Text = phone1;
+        //chairsTable.Cell(6 + (5 * (row)), column).Range.Text = phone2;
+        chairsTable.Cell(5 + (5 * (row)), column).Range.Text = email;
         counter++;
 
         column = 2;
@@ -1395,13 +1395,13 @@ namespace DistrictManager
         phone2 = "";
         if (counter >= chairs.Count)
         {
-          chairsTable.Rows[2 + (6 * (row))].Range.Font.Size = 8;
-          chairsTable.Rows[3 + (6 * (row))].Range.Font.Bold = 1;
-          chairsTable.Rows[3 + (6 * (row))].Range.Font.Size = 9;
-          chairsTable.Rows[4 + (6 * (row))].Range.Font.Size = 9;
-          chairsTable.Rows[5 + (6 * (row))].Range.Font.Size = 9;
-          chairsTable.Rows[6 + (6 * (row))].Range.Font.Size = 9;
-          chairsTable.Rows[7 + (6 * (row))].Range.Font.Size = 9;
+          chairsTable.Rows[2 + (5 * (row))].Range.Font.Size = 9;
+          chairsTable.Rows[2 + (5 * (row))].Range.Font.Bold = 1;
+          chairsTable.Rows[3 + (5 * (row))].Range.Font.Size = 9;
+          chairsTable.Rows[4 + (5 * (row))].Range.Font.Size = 9;
+          chairsTable.Rows[5 + (5 * (row))].Range.Font.Size = 9;
+          chairsTable.Rows[6 + (5 * (row))].Range.Font.Size = 4;
+          //chairsTable.Rows[7 + (5 * (row))].Range.Font.Size = 9;
           //chairsTable.Rows[8 + (8 * (row))].Range.Font.Size = 9;
           //chairsTable.Rows[9 + (8 * (row))].Range.Font.Size = 9;
 
@@ -1413,27 +1413,27 @@ namespace DistrictManager
         if (memberID > 0)
           GenerateMemberInfo(memberID, ref name, ref loc1, ref loc2, ref phone1, ref phone2, ref email, false, true, false);
 
-        if (phone2.Length < 1 && email.Length > 1)
-        {
-          phone2 = email;
-          email = "";
-        }
+        //if (phone2.Length < 1 && email.Length > 1)
+        //{
+        //  phone2 = email;
+        //  email = "";
+        //}
 
-        chairsTable.Cell(3 + (6 * (row)), column).Range.Text = office;
-        chairsTable.Cell(4 + (6 * (row)), column).Range.Text = name;
+        chairsTable.Cell(2 + (5 * (row)), column).Range.Text = office;
+        chairsTable.Cell(3 + (5 * (row)), column).Range.Text = name;
         ///chairsTable.Cell(5 + (8 * (row)), column).Range.Text = loc1;
         //chairsTable.Cell(6 + (8 * (row)), column).Range.Text = loc2;
-        chairsTable.Cell(5 + (6 * (row)), column).Range.Text = phone1;
-        chairsTable.Cell(6 + (6 * (row)), column).Range.Text = phone2;
-        chairsTable.Cell(7 + (6 * (row)), column).Range.Text = email;
+        chairsTable.Cell(4 + (5 * (row)), column).Range.Text = phone1;
+        //chairsTable.Cell(6 + (6 * (row)), column).Range.Text = phone2;
+        chairsTable.Cell(5 + (5 * (row)), column).Range.Text = email;
 
-        chairsTable.Rows[2 + (6 * (row))].Range.Font.Size = 8;
-        chairsTable.Rows[3 + (6 * (row))].Range.Font.Bold = 1;
-        chairsTable.Rows[3 + (6 * (row))].Range.Font.Size = 9;
-        chairsTable.Rows[4 + (6 * (row))].Range.Font.Size = 9;
-        chairsTable.Rows[5 + (6 * (row))].Range.Font.Size = 9;
-        chairsTable.Rows[6 + (6 * (row))].Range.Font.Size = 9;
-        chairsTable.Rows[7 + (6 * (row))].Range.Font.Size = 9;
+        chairsTable.Rows[2 + (5 * (row))].Range.Font.Size = 9;
+        chairsTable.Rows[2 + (5 * (row))].Range.Font.Bold = 1;
+        chairsTable.Rows[3 + (5 * (row))].Range.Font.Size = 9;
+        chairsTable.Rows[4 + (5 * (row))].Range.Font.Size = 9;
+        chairsTable.Rows[5 + (5 * (row))].Range.Font.Size = 9;
+        chairsTable.Rows[6 + (5 * (row))].Range.Font.Size = 4;
+        //chairsTable.Rows[7 + (5 * (row))].Range.Font.Size = 9;
         //chairsTable.Rows[8 + (8 * (row))].Range.Font.Size = 9;
         //chairsTable.Rows[9 + (8 * (row))].Range.Font.Size = 9;
         counter++;
