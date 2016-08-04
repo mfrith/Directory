@@ -33,8 +33,8 @@ namespace DMWPF
 
     internal void LoadMembers()
     {
-      conn.ConnectionString = @"Server=.\SQLEXPRESS;Database=District12;Integrated Security=true;";
-      conn.Open();
+      conn.ConnectionString = @"Server=.\SQLEXPRESS;Database=D12;Integrated Security=true;";
+      conn.Open(); 
 
       DataSet dsMembers = new DataSet();
       SqlDataAdapter daMember = new SqlDataAdapter();

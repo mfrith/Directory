@@ -306,7 +306,7 @@ namespace DistrictManager
 
     private void Form1_Load(object sender, EventArgs e)
     {
-      conn.ConnectionString = @"Server=.\SQLEXPRESS;Database=District12;Integrated Security=true;";
+      conn.ConnectionString = @"Server=.\SQLEXPRESS;Database=D12;Integrated Security=true;";
       conn.Open();
         /*
       listViewOfficer.View = View.Details;
