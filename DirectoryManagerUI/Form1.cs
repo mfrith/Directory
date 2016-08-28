@@ -517,7 +517,7 @@ namespace DistrictManager
       DataTable datatableAreaGov = dsAreaGov.Tables["Table"];
       DataRow rowAreaGov = datatableAreaGov.Rows[0];
       int areas = (int)rowAreaGov["Area"];
-      string website = (string)rowAreaGov["WebSite"];
+      //string website = (string)rowAreaGov["WebSite"];
       string divStatus = (string)rowAreaGov["Status"];
 
       bool hasStatus = false;
@@ -546,7 +546,7 @@ namespace DistrictManager
 
       if (hasStatus)
       {
-        string divStat = "2014-2015 ";
+        string divStat = "2015-2016 ";
         switch (divStatus)
         {
           case "P":
@@ -974,20 +974,18 @@ namespace DistrictManager
       int blocksize = 6;
       foreach (DataRow rowDistOfficers in dtDistOfficers.Rows)
       {
-
-
         name = "";
         loc1 = "";
         loc2 = "";
         phone1 = "";
         phone2 = "";
-        office = rowDistOfficers.ItemArray[2].ToString().Trim();
+        office = rowDistOfficers.ItemArray[0].ToString().Trim();
         memberID = (int)rowDistOfficers.ItemArray[1];
 
         if (memberID > 0)
           GenerateMemberInfo(memberID, ref name, ref loc1, ref loc2, ref phone1, ref phone2, ref email, false, true, false);
 
-        email = rowDistOfficers.ItemArray[3].ToString().Trim();
+        email = rowDistOfficers.ItemArray[2].ToString().Trim();
         if (counter > 6)
         {
           column = 2;
@@ -1283,7 +1281,7 @@ namespace DistrictManager
       foreach (DataRow rowChairs in dtChairs.Rows)
       {
         //sortedChairList.Add(rowChairs.ItemArray[1].ToString().Trim(), (int)rowChairs.ItemArray[2]);
-        chair theChair = new chair(rowChairs.ItemArray[2].ToString().Trim(), (int)rowChairs.ItemArray[1]);
+        chair theChair = new chair(rowChairs.ItemArray[0].ToString().Trim(), (int)rowChairs.ItemArray[1]);
         if (theChair.MemberID > 0)
           chairs.Add(theChair);
         //chairs.SetValue(theChair);
@@ -2808,7 +2806,7 @@ namespace DistrictManager
 
       if (distinguishedArea)
       {
-        string areaStat = "2014-2015 ";
+        string areaStat = "2015-2016 ";
         switch (areaStatus)
         {
           case "P":
