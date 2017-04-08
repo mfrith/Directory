@@ -200,7 +200,7 @@ namespace DistrictManagerEngine
     {
       conn.ConnectionString = @"Server=.\SQLEXPRESS;Database=D12;Integrated Security=true;";
       //FileStream fleReader = new FileStream("D:\\TI\\Databases\\July09\\officers.txt", FileMode.Open, FileAccess.Read);
-      FileStream fleReader = new FileStream("G:\\TI\\2016July\\Officers.txt", FileMode.Open, FileAccess.Read);
+      FileStream fleReader = new FileStream("G:\\TI\\2017Jan\\Officers.txt", FileMode.Open, FileAccess.Read);
 
       StreamReader stmReader = new StreamReader(fleReader);
 
@@ -245,7 +245,7 @@ namespace DistrictManagerEngine
       CreateClubMembersTable();
 
       //FileStream fleReader = new FileStream("D:\\TI\\Databases\\July09\\members.txt", FileMode.Open, FileAccess.Read);
-      FileStream fleReader = new FileStream("G:\\TI\\2016July\\members.txt", FileMode.Open, FileAccess.Read);
+      FileStream fleReader = new FileStream("G:\\TI\\2017Jan\\members.txt", FileMode.Open, FileAccess.Read);
 
       StreamReader stmReader = new StreamReader(fleReader);
 

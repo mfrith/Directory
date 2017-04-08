@@ -2604,6 +2604,26 @@ namespace DistrictManager
         //}
       }
     }
+    private void ModifyClubPhone(ref String phone)
+    {
+      if (phone.Length < 10)
+        phone = "";
+      else if (phone.IndexOf('.') < 0 && phone.Length > 9)
+      {
+        String areaCode = phone.Substring(0, 3);
+        String exchange = phone.Substring(3, 3);
+        String num = phone.Substring(6, 4);
+        String newNum = areaCode + "." + exchange + "." + num;
+
+        //String extension;
+        //if (phone.Length > 10) // has extension
+        //{
+        //  extension = phone.Substring(10, (phone.Length - 10));
+        //  newNum += " " + extension;
+        //}
+        phone = newNum;
+      }
+    }
 
     private void ModifyPhoneNumbers(ref String worknum, ref String homenum, ref String cellnum)
     {
@@ -2736,7 +2756,7 @@ namespace DistrictManager
         //{
         oWord = new Word.Application();
         SetUpDocument();
-        GenerateDivision(rowDivision.ItemArray[1].ToString());
+        GenerateDivision(rowDivision.ItemArray[0].ToString());
       }
       //GenerateAreaNew("D", 1);
     }
@@ -2998,7 +3018,7 @@ namespace DistrictManager
         if (division == "D")
         {
           if (clubNo == "782516" || clubNo == "1071907" || clubNo == "9681" ||
-              clubNo == "1470790")
+              clubNo == "5220356")
             bSEC = true;
         }
 
@@ -3012,23 +3032,24 @@ namespace DistrictManager
         clubName = rowClub.ItemArray[2].ToString().Trim();
         dayOfTheWeek = rowClub.ItemArray[7].ToString().Trim();
         time = rowClub.ItemArray[8].ToString().Trim();
+        if (!System.DBNull.Value.Equals(rowClub.ItemArray[17]))
+          web = rowClub.ItemArray[17].ToString().Trim();
+        if (!System.DBNull.Value.Equals(rowClub.ItemArray[14]))
+          phone = rowClub.ItemArray[14].ToString().Trim();
         if (!System.DBNull.Value.Equals(rowClub.ItemArray[15]))
-          web = rowClub.ItemArray[15].ToString().Trim();
-        if (!System.DBNull.Value.Equals(rowClub.ItemArray[12]))
-          phone = rowClub.ItemArray[12].ToString().Trim();
-        //phone2 = rowClub.ItemArray[15].ToString().Trim();
-        if (!System.DBNull.Value.Equals(rowClub.ItemArray[13]))
-          email = rowClub.ItemArray[13].ToString().Trim();
+          phone2 = rowClub.ItemArray[15].ToString().Trim();
+        if (!System.DBNull.Value.Equals(rowClub.ItemArray[16]))
+          email = rowClub.ItemArray[16].ToString().Trim();
         //email2 = rowClub.ItemArray[17].ToString().Trim();
         loc1 = rowClub.ItemArray[5].ToString().Trim();
         //loc2 = rowClub.ItemArray[9].ToString().Trim();
         address = rowClub.ItemArray[6].ToString().Trim();
         city = rowClub.ItemArray[9].ToString().Trim();
         zip = rowClub.ItemArray[10].ToString().Trim();
-        if (!System.DBNull.Value.Equals(rowClub.ItemArray[14]))
-          facebook = rowClub.ItemArray[14].ToString().Trim();
+        //if (!System.DBNull.Value.Equals(rowClub.ItemArray[15]))
+        //  facebook = rowClub.ItemArray[15].ToString().Trim();
         //frequency = rowClub.ItemArray[7].ToString().Trim();
-        clubStatus = rowClub.ItemArray[17].ToString();
+        clubStatus = rowClub.ItemArray[19].ToString();
         //meeting = rowClub.ItemArray[22].ToString();
 
         Word.Table clubLocationTable;
@@ -3075,6 +3096,12 @@ namespace DistrictManager
         //if (dayOfTheWeek.Length > 1)
         //  clubRow2 += dayOfTheWeek + " ";
 
+        ModifyClubPhone(ref phone);
+        ModifyClubPhone(ref phone2);
+
+        if (phone == phone2)
+          phone2 = string.Empty;
+
         if (dayOfTheWeek.Length > 1)
           clubRow2 += dayOfTheWeek;
 
@@ -3084,14 +3111,16 @@ namespace DistrictManager
         if (web.Length > 1)
           clubRow2 += ", " + web;
 
-        if (phone.Length > 1)
-          clubRow2 += ", " + phone;
-
         if (email.Length > 1)
           clubRow2 += ", " + email;
 
-        if (facebook.Length > 1)
-          clubRow2 += ", " + facebook;
+        if (phone.Length > 1)
+          clubRow2 += ", " + phone;
+
+        if (phone2.Length > 1)
+          clubRow2 += ", " + phone2;
+        //if (facebook.Length > 1)
+        //  clubRow2 += ", " + facebook;
 
         //clubRow3 = loc1 + ", " + loc2 + ", " + address + ", " + city + ", " + zip;
         if (loc1.Length > 1)
@@ -3134,7 +3163,7 @@ namespace DistrictManager
         //}
         if (distinguishedClub)
         {
-          string clubStat = "2014-2015 ";
+          string clubStat = "2015-2016 ";
           switch (clubStatus)
           {
             case "P":
