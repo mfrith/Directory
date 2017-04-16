@@ -31,29 +31,32 @@ namespace DistrictManagerEngine
       public string Division;
       public string Club_Type;
       public string Advanced;
-      public string Facebook;
+      public string OpenClosed;
+      public string Contact2;
+      public string Online;
 
       public clubRecord(string[] rcd)
       {
-        ClubNo = System.Int32.Parse(rcd[2]);
-        ClubName = rcd[3];
-        Area = System.Int32.Parse(rcd[0]);
-        Division = rcd[1];
+        ClubNo = System.Int32.Parse(rcd[0]);
+        ClubName = rcd[1];
+        Area = System.Int32.Parse(rcd[2]);
+        Division = rcd[3];
         Location = rcd[4];
         Address = rcd[5];
-        Day = rcd[10];
-        Time = rcd[9];
-        City = rcd[6];
-        Zip = rcd[7];
-        Club_Type = rcd[11];
-        Advanced = rcd[15];
+        Day = rcd[6];
+        Time = rcd[7];
+        City = rcd[8];
+        Zip = rcd[9];
+        Club_Type = rcd[10];
+        OpenClosed = rcd[11];
+        Advanced = rcd[12];
         //Club_status = rcd[19];
-        Phone = rcd[8];
-        //Contact2 = rcd[21];
+        Phone = rcd[13];
+        Contact2 = rcd[14];
         //Fax = rcd[22];
-        Email = rcd[13];
-        Facebook = rcd[14];
-        Website = rcd[12];
+        Email = rcd[15];
+        Website = rcd[16];
+        Online = rcd[17];
       }
     }
 
@@ -195,9 +198,9 @@ namespace DistrictManagerEngine
 
     public void LoadOfficers()
     {
-      conn.ConnectionString = @"Server=.\SQLEXPRESS;Database=District12;Integrated Security=true;";
+      conn.ConnectionString = @"Server=.\SQLEXPRESS;Database=D12;Integrated Security=true;";
       //FileStream fleReader = new FileStream("D:\\TI\\Databases\\July09\\officers.txt", FileMode.Open, FileAccess.Read);
-      FileStream fleReader = new FileStream("G:\\TI\\2016Jan\\Officers.txt", FileMode.Open, FileAccess.Read);
+      FileStream fleReader = new FileStream("G:\\TI\\2017Jan\\Officers.txt", FileMode.Open, FileAccess.Read);
 
       StreamReader stmReader = new StreamReader(fleReader);
 
@@ -235,14 +238,14 @@ namespace DistrictManagerEngine
 
     public void LoadMembers()
     {
-      conn.ConnectionString = @"Server=.\SQLEXPRESS;Database=District12;Integrated Security=true;";
+      conn.ConnectionString = @"Server=.\SQLEXPRESS;Database=D12;Integrated Security=true;";
       conn.Open();
 
       CreateMembersTable();
       CreateClubMembersTable();
 
       //FileStream fleReader = new FileStream("D:\\TI\\Databases\\July09\\members.txt", FileMode.Open, FileAccess.Read);
-      FileStream fleReader = new FileStream("G:\\TI\\2016Jan\\members.txt", FileMode.Open, FileAccess.Read);
+      FileStream fleReader = new FileStream("G:\\TI\\2017Jan\\members.txt", FileMode.Open, FileAccess.Read);
 
       StreamReader stmReader = new StreamReader(fleReader);
 
@@ -411,11 +414,13 @@ namespace DistrictManagerEngine
       + "City varchar(max),"
       + "Zip char(10),"
       + "Type varchar(max),"
+      + "OpenClosed char(15),"
+      + "Advanced char(1),"
       + "Phone varchar(max),"
+      + "Phone2 varchar(max),"
       + "Email varchar(max),"
-      + "Facebook varchar(max),"
       + "Website varchar(max),"
-      + "Advanced char(4))";
+      + "Online char(3))";
 
       SqlCommand dbCmd = new SqlCommand(CreateClubTable, conn);
       dbCmd.ExecuteNonQuery();
@@ -423,9 +428,9 @@ namespace DistrictManagerEngine
 
     public void LoadClubs()
     {
-      conn.ConnectionString = @"Server=.\SQLEXPRESS;Database=District12;Integrated Security=true;";
+      conn.ConnectionString = @"Server=.\SQLEXPRESS;Database=D12;Integrated Security=true;";
       conn.Open();
-      FileStream fleReader = new FileStream("C:\\Users\\mike\\Documents\\TI\\clubs.txt", FileMode.Open, FileAccess.Read);
+      FileStream fleReader = new FileStream("G:\\TI\\2016July\\clubs.txt", FileMode.Open, FileAccess.Read);
 
       StreamReader stmReader = new StreamReader(fleReader);
 
@@ -443,8 +448,8 @@ namespace DistrictManagerEngine
 
         string club = "INSERT INTO Clubs VALUES (" + rcd.ClubNo + ",'" + rcd.ClubName + "','" + rcd.Division
                      + "','" + rcd.Area + "','" + rcd.Location + "','" + rcd.Address + "','" + rcd.Day + "','" + rcd.Time + "','" + rcd.City + "','" + rcd.Zip
-                     + "','" + rcd.Club_Type + "','" + rcd.Phone + "','" + rcd.Email + "','" + rcd.Facebook
-                     + "','" + rcd.Website + "','" + rcd.Advanced + "')";
+                     + "','" + rcd.Club_Type + "','" + rcd.OpenClosed + "','" + rcd.Advanced + "','" + rcd.Phone + "','" + rcd.Contact2 + "','" + rcd.Email
+                     + "','" + rcd.Website + "','" + rcd.Online + "')";
         //  Insert dept table records first
         SqlCommand dbcmd = new SqlCommand(club, conn);
         dbcmd.ExecuteNonQuery();

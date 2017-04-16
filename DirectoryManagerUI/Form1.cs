@@ -306,7 +306,7 @@ namespace DistrictManager
 
     private void Form1_Load(object sender, EventArgs e)
     {
-      conn.ConnectionString = @"Server=.\SQLEXPRESS;Database=District12;Integrated Security=true;";
+      conn.ConnectionString = @"Server=.\SQLEXPRESS;Database=D12;Integrated Security=true;";
       conn.Open();
         /*
       listViewOfficer.View = View.Details;
@@ -517,7 +517,7 @@ namespace DistrictManager
       DataTable datatableAreaGov = dsAreaGov.Tables["Table"];
       DataRow rowAreaGov = datatableAreaGov.Rows[0];
       int areas = (int)rowAreaGov["Area"];
-      string website = (string)rowAreaGov["WebSite"];
+      //string website = (string)rowAreaGov["WebSite"];
       string divStatus = (string)rowAreaGov["Status"];
 
       bool hasStatus = false;
@@ -546,7 +546,7 @@ namespace DistrictManager
 
       if (hasStatus)
       {
-        string divStat = "2014-2015 ";
+        string divStat = "2015-2016 ";
         switch (divStatus)
         {
           case "P":
@@ -974,20 +974,18 @@ namespace DistrictManager
       int blocksize = 6;
       foreach (DataRow rowDistOfficers in dtDistOfficers.Rows)
       {
-
-
         name = "";
         loc1 = "";
         loc2 = "";
         phone1 = "";
         phone2 = "";
-        office = rowDistOfficers.ItemArray[2].ToString().Trim();
+        office = rowDistOfficers.ItemArray[0].ToString().Trim();
         memberID = (int)rowDistOfficers.ItemArray[1];
 
         if (memberID > 0)
           GenerateMemberInfo(memberID, ref name, ref loc1, ref loc2, ref phone1, ref phone2, ref email, false, true, false);
 
-        email = rowDistOfficers.ItemArray[3].ToString().Trim();
+        email = rowDistOfficers.ItemArray[2].ToString().Trim();
         if (counter > 6)
         {
           column = 2;
@@ -1283,7 +1281,7 @@ namespace DistrictManager
       foreach (DataRow rowChairs in dtChairs.Rows)
       {
         //sortedChairList.Add(rowChairs.ItemArray[1].ToString().Trim(), (int)rowChairs.ItemArray[2]);
-        chair theChair = new chair(rowChairs.ItemArray[2].ToString().Trim(), (int)rowChairs.ItemArray[1]);
+        chair theChair = new chair(rowChairs.ItemArray[0].ToString().Trim(), (int)rowChairs.ItemArray[1]);
         if (theChair.MemberID > 0)
           chairs.Add(theChair);
         //chairs.SetValue(theChair);
@@ -2606,6 +2604,26 @@ namespace DistrictManager
         //}
       }
     }
+    private void ModifyClubPhone(ref String phone)
+    {
+      if (phone.Length < 10)
+        phone = "";
+      else if (phone.IndexOf('.') < 0 && phone.Length > 9)
+      {
+        String areaCode = phone.Substring(0, 3);
+        String exchange = phone.Substring(3, 3);
+        String num = phone.Substring(6, 4);
+        String newNum = areaCode + "." + exchange + "." + num;
+
+        //String extension;
+        //if (phone.Length > 10) // has extension
+        //{
+        //  extension = phone.Substring(10, (phone.Length - 10));
+        //  newNum += " " + extension;
+        //}
+        phone = newNum;
+      }
+    }
 
     private void ModifyPhoneNumbers(ref String worknum, ref String homenum, ref String cellnum)
     {
@@ -2738,7 +2756,7 @@ namespace DistrictManager
         //{
         oWord = new Word.Application();
         SetUpDocument();
-        GenerateDivision(rowDivision.ItemArray[1].ToString());
+        GenerateDivision(rowDivision.ItemArray[0].ToString());
       }
       //GenerateAreaNew("D", 1);
     }
@@ -2808,7 +2826,7 @@ namespace DistrictManager
 
       if (distinguishedArea)
       {
-        string areaStat = "2014-2015 ";
+        string areaStat = "2015-2016 ";
         switch (areaStatus)
         {
           case "P":
@@ -3000,7 +3018,7 @@ namespace DistrictManager
         if (division == "D")
         {
           if (clubNo == "782516" || clubNo == "1071907" || clubNo == "9681" ||
-              clubNo == "1470790")
+              clubNo == "5220356")
             bSEC = true;
         }
 
@@ -3014,23 +3032,24 @@ namespace DistrictManager
         clubName = rowClub.ItemArray[2].ToString().Trim();
         dayOfTheWeek = rowClub.ItemArray[7].ToString().Trim();
         time = rowClub.ItemArray[8].ToString().Trim();
+        if (!System.DBNull.Value.Equals(rowClub.ItemArray[17]))
+          web = rowClub.ItemArray[17].ToString().Trim();
+        if (!System.DBNull.Value.Equals(rowClub.ItemArray[14]))
+          phone = rowClub.ItemArray[14].ToString().Trim();
         if (!System.DBNull.Value.Equals(rowClub.ItemArray[15]))
-          web = rowClub.ItemArray[15].ToString().Trim();
-        if (!System.DBNull.Value.Equals(rowClub.ItemArray[12]))
-          phone = rowClub.ItemArray[12].ToString().Trim();
-        //phone2 = rowClub.ItemArray[15].ToString().Trim();
-        if (!System.DBNull.Value.Equals(rowClub.ItemArray[13]))
-          email = rowClub.ItemArray[13].ToString().Trim();
+          phone2 = rowClub.ItemArray[15].ToString().Trim();
+        if (!System.DBNull.Value.Equals(rowClub.ItemArray[16]))
+          email = rowClub.ItemArray[16].ToString().Trim();
         //email2 = rowClub.ItemArray[17].ToString().Trim();
         loc1 = rowClub.ItemArray[5].ToString().Trim();
         //loc2 = rowClub.ItemArray[9].ToString().Trim();
         address = rowClub.ItemArray[6].ToString().Trim();
         city = rowClub.ItemArray[9].ToString().Trim();
         zip = rowClub.ItemArray[10].ToString().Trim();
-        if (!System.DBNull.Value.Equals(rowClub.ItemArray[14]))
-          facebook = rowClub.ItemArray[14].ToString().Trim();
+        //if (!System.DBNull.Value.Equals(rowClub.ItemArray[15]))
+        //  facebook = rowClub.ItemArray[15].ToString().Trim();
         //frequency = rowClub.ItemArray[7].ToString().Trim();
-        clubStatus = rowClub.ItemArray[17].ToString();
+        clubStatus = rowClub.ItemArray[19].ToString();
         //meeting = rowClub.ItemArray[22].ToString();
 
         Word.Table clubLocationTable;
@@ -3077,6 +3096,12 @@ namespace DistrictManager
         //if (dayOfTheWeek.Length > 1)
         //  clubRow2 += dayOfTheWeek + " ";
 
+        ModifyClubPhone(ref phone);
+        ModifyClubPhone(ref phone2);
+
+        if (phone == phone2)
+          phone2 = string.Empty;
+
         if (dayOfTheWeek.Length > 1)
           clubRow2 += dayOfTheWeek;
 
@@ -3086,14 +3111,16 @@ namespace DistrictManager
         if (web.Length > 1)
           clubRow2 += ", " + web;
 
-        if (phone.Length > 1)
-          clubRow2 += ", " + phone;
-
         if (email.Length > 1)
           clubRow2 += ", " + email;
 
-        if (facebook.Length > 1)
-          clubRow2 += ", " + facebook;
+        if (phone.Length > 1)
+          clubRow2 += ", " + phone;
+
+        if (phone2.Length > 1)
+          clubRow2 += ", " + phone2;
+        //if (facebook.Length > 1)
+        //  clubRow2 += ", " + facebook;
 
         //clubRow3 = loc1 + ", " + loc2 + ", " + address + ", " + city + ", " + zip;
         if (loc1.Length > 1)
@@ -3136,7 +3163,7 @@ namespace DistrictManager
         //}
         if (distinguishedClub)
         {
-          string clubStat = "2014-2015 ";
+          string clubStat = "2015-2016 ";
           switch (clubStatus)
           {
             case "P":
